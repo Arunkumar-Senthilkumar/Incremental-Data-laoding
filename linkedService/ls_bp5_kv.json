@@ -1,0 +1,10 @@
+{
+	"name": "ls_bp5_kv",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://bp5-kv.vault.azure.net/"
+		}
+	}
+}
