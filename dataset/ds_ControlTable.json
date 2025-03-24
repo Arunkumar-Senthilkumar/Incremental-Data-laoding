@@ -1,0 +1,27 @@
+{
+	"name": "ds_ControlTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_bp5_sqldb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "TableName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LastProcessedTimestamp",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "ControlTable"
+		}
+	}
+}
