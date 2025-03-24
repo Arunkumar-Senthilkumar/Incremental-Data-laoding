@@ -1,0 +1,9 @@
+{
+	"name": "bp5-adf",
+	"location": "canadacentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "7679acab-7bb0-4303-b694-8840131581fe",
+		"tenantId": "ff05faeb-f1fd-4af8-9f9f-5541837df902"
+	}
+}
