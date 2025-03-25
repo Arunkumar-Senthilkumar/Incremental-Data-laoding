@@ -251,7 +251,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"method": "POST",
-								"url": "https://hooks.slack.com/services/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",
+								"url": "https://hooks.slack.com/services/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",
 								"body": {
 									"text": "Incremental data load Pipeline execution succeeded!"
 								}
@@ -303,7 +303,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"method": "POST",
-								"url": "https://hooks.slack.com/services/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",
+								"url": "https://hooks.slack.com/services/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",
 								"body": {
 									"text": "Incremental data load Pipeline execution Failed!"
 								}
@@ -479,6 +479,60 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Web3",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Copy data2",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"url": "https://hooks.slack.com/services/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",
+					"body": {
+						"text": "Data ingestion into ADLS completed successfully!"
+					}
+				}
+			},
+			{
+				"name": "Web4",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Copy data2",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"url": "https://hooks.slack.com/services/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",
+					"body": {
+						"text": "Data ingestion into ADLS failed!"
+					}
+				}
 			}
 		],
 		"annotations": []
