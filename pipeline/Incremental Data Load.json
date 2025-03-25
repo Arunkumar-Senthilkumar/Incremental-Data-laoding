@@ -251,7 +251,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"method": "POST",
-								"url": "https://hooks.slack.com/services/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",
+								"url": "https://hooks.slack.com/services/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",
 								"body": {
 									"text": "Incremental data load Pipeline execution succeeded!"
 								}
@@ -303,7 +303,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"method": "POST",
-								"url": "https://hooks.slack.com/services/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",
+								"url": "https://hooks.slack.com/services/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",
 								"body": {
 									"text": "Incremental data load Pipeline execution Failed!"
 								}
