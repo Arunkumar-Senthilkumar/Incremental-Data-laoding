@@ -1,0 +1,21 @@
+{
+	"name": "ls_bp5adls",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://bp5adls.dfs.core.windows.net/",
+			"tenant": "ff05faeb-f1fd-4af8-9f9f-5541837df902",
+			"servicePrincipalId": "dd25363f-2e01-4061-a301-759d3da7d245",
+			"servicePrincipalCredentialType": "ServicePrincipalKey",
+			"servicePrincipalCredential": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ls_bp5_kv",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "idl-sp"
+			}
+		}
+	}
+}
