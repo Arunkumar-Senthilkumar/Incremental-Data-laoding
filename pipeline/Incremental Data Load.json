@@ -207,6 +207,110 @@
 					"referenceName": "ls_bp5_sqldb",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "If Condition1",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Stored procedure1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@and(greaterOrEquals(formatDateTime(utcNow(), 'HH'), '18'), lessOrEquals(formatDateTime(utcNow(), 'HH'), '24'))",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Wait1",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 1
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Web1",
+							"type": "WebActivity",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"method": "POST",
+								"url": "https://hooks.slack.com/services/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",
+								"body": {
+									"text": "Incremental data load Pipeline execution succeeded!"
+								}
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "If Condition2",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Stored procedure1",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@and(greaterOrEquals(formatDateTime(utcNow(), 'HH'), '07'), lessOrEquals(formatDateTime(utcNow(), 'HH'), '09'))",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Wait2",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 1
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Web2",
+							"type": "WebActivity",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"method": "POST",
+								"url": "https://hooks.slack.com/services/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",
+								"body": {
+									"text": "Incremental data load Pipeline execution Failed!"
+								}
+							}
+						}
+					]
+				}
 			}
 		],
 		"annotations": []
