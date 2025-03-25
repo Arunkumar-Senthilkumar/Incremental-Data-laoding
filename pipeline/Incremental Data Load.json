@@ -222,7 +222,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@and(greaterOrEquals(formatDateTime(utcNow(), 'HH'), '07'), lessOrEquals(formatDateTime(utcNow(), 'HH'), '09'))",
+						"value": "@and(greaterOrEquals(formatDateTime(utcNow(), 'HH'), '18'), lessOrEquals(formatDateTime(utcNow(), 'HH'), '21'))",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
