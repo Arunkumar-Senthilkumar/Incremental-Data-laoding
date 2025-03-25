@@ -251,7 +251,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"method": "POST",
-								"url": "https://hooks.slack.com/services/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",
+								"url": "https://hooks.slack.com/services/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",
 								"body": {
 									"text": "Incremental data load Pipeline execution succeeded!"
 								}
@@ -303,7 +303,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"method": "POST",
-								"url": "https://hooks.slack.com/services/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",
+								"url": "https://hooks.slack.com/services/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",
 								"body": {
 									"text": "Incremental data load Pipeline execution Failed!"
 								}
@@ -495,7 +495,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"method": "POST",
-					"url": "https://hooks.slack.com/services/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",
+					"url": "https://hooks.slack.com/services/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",
 					"body": {
 						"text": "Data ingestion into ADLS completed successfully!"
 					}
@@ -522,7 +522,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"method": "POST",
-					"url": "https://hooks.slack.com/services/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",
+					"url": "https://hooks.slack.com/services/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",
 					"body": {
 						"text": "Data ingestion into ADLS failed!"
 					}
