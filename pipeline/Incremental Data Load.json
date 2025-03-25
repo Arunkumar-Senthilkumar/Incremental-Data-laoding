@@ -227,23 +227,12 @@
 					},
 					"ifFalseActivities": [
 						{
-							"name": "Web3",
-							"type": "WebActivity",
+							"name": "Wait1",
+							"type": "Wait",
 							"dependsOn": [],
-							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
 							"userProperties": [],
 							"typeProperties": {
-								"method": "POST",
-								"url": "https://prod-81.westus.logic.azure.com:443/workflows/740ca50a5f034b84a0879f40b135ec78/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JmgVtadrVPl5HmNlnUvKQrr_lBd_582n0muVTG05sv4",
-								"body": {
-									"text": "Pipeline execution succeeded!"
-								}
+								"waitTimeInSeconds": 1
 							}
 						}
 					],
@@ -262,9 +251,9 @@
 							"userProperties": [],
 							"typeProperties": {
 								"method": "POST",
-								"url": "https://prod-71.westus.logic.azure.com:443/workflows/984855fc611b4da58860db1aef922da1/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=nXW0C-6p_wW3JwAKgl2u91UkIBhXdUj4eXN3eMHpoO0",
+								"url": "https://hooks.slack.com/services/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",
 								"body": {
-									"text": "Pipeline execution succeeded!"
+									"text": "Incremental data load Pipeline execution succeeded!"
 								}
 							}
 						}
@@ -272,8 +261,8 @@
 				}
 			},
 			{
-				"name": "Web2",
-				"type": "WebActivity",
+				"name": "If Condition2",
+				"type": "IfCondition",
 				"dependsOn": [
 					{
 						"activity": "Stored procedure1",
@@ -282,20 +271,45 @@
 						]
 					}
 				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
 				"userProperties": [],
 				"typeProperties": {
-					"method": "POST",
-					"url": "https://prod-08.westus.logic.azure.com:443/workflows/4b0b846593944dfe91b563538a5c678c/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=gK6EN1-pqFtqDvUq3lYf3jcqFYeRT-vy5MiJTDaROzM",
-					"body": {
-						"text": "Pipeline execution succeeded!"
-					}
+					"expression": {
+						"value": "@and(greaterOrEquals(formatDateTime(utcNow(), 'HH'), '07'), lessOrEquals(formatDateTime(utcNow(), 'HH'), '09'))",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Wait2",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 1
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Web2",
+							"type": "WebActivity",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"method": "POST",
+								"url": "https://hooks.slack.com/services/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",
+								"body": {
+									"text": "Incremental data load Pipeline execution Failed!"
+								}
+							}
+						}
+					]
 				}
 			}
 		],
