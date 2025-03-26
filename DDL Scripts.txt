@@ -1,0 +1,92 @@
+CREATE TABLE SalesData (
+    SalesID INT IDENTITY(1,1) PRIMARY KEY,
+    CustomerID INT,
+    ProductName NVARCHAR(100),
+    Quantity INT,
+    UnitPrice DECIMAL(10,2),
+    TotalAmount AS (Quantity * UnitPrice) PERSISTED,
+    SaleDate DATETIME DEFAULT GETDATE(),
+    ModifiedDate DATETIME DEFAULT GETDATE()
+);
+
+INSERT INTO SalesData (CustomerID, ProductName, Quantity, UnitPrice, ModifiedDate)
+VALUES
+    (101, 'Laptop', 2, 850.00, '2024-03-20 10:00:00'),
+    (102, 'Smartphone', 1, 699.00, '2024-03-20 11:30:00'),
+    (103, 'Tablet', 3, 450.00, '2024-03-21 09:15:00'),
+    (104, 'Monitor', 2, 300.00, '2024-03-21 14:45:00'),
+    (105, 'Wireless Mouse', 5, 25.00, '2024-03-22 08:00:00'),
+    (106, 'Keyboard', 4, 50.00, '2024-03-22 12:30:00'),
+    (107, 'Headphones', 2, 120.00, '2024-03-23 16:00:00'),
+    (108, 'External Hard Drive', 1, 200.00, '2024-03-23 18:30:00'),
+    (109, 'Smartwatch', 2, 150.00, '2024-03-24 09:00:00'),
+    (110, 'Bluetooth Speaker', 3, 80.00, '2024-03-24 13:15:00'),
+    (111, 'Laptop', 1, 900.00, '2024-03-25 10:45:00'),
+    (112, 'Smartphone', 2, 650.00, '2024-03-25 12:20:00'),
+    (113, 'Tablet', 1, 400.00, '2024-03-25 15:30:00'),
+    (114, 'Monitor', 3, 320.00, '2024-03-26 09:45:00'),
+    (115, 'Wireless Mouse', 4, 28.00, '2024-03-26 11:50:00'),
+    (116, 'Keyboard', 2, 55.00, '2024-03-26 14:10:00'),
+    (117, 'Headphones', 3, 110.00, '2024-03-27 16:30:00'),
+    (118, 'External Hard Drive', 1, 210.00, '2024-03-27 18:00:00'),
+    (119, 'Smartwatch', 2, 160.00, '2024-03-28 08:20:00'),
+    (120, 'Bluetooth Speaker', 3, 85.00, '2024-03-28 12:40:00'),
+    (121, 'Laptop', 2, 870.00, '2024-03-29 09:10:00'),
+    (122, 'Smartphone', 1, 720.00, '2024-03-29 11:25:00'),
+    (123, 'Tablet', 3, 460.00, '2024-03-29 14:00:00'),
+    (124, 'Monitor', 1, 290.00, '2024-03-30 10:30:00'),
+    (125, 'Wireless Mouse', 5, 30.00, '2024-03-30 12:00:00'),
+    (126, 'Keyboard', 3, 60.00, '2024-03-30 15:45:00'),
+    (127, 'Headphones', 2, 130.00, '2024-03-31 09:55:00'),
+    (128, 'External Hard Drive', 1, 220.00, '2024-03-31 14:15:00'),
+    (129, 'Smartwatch', 2, 170.00, '2024-04-01 08:30:00'),
+    (130, 'Bluetooth Speaker', 3, 90.00, '2024-04-01 13:10:00'),
+    (131, 'Laptop', 1, 880.00, '2024-04-02 10:20:00'),
+    (132, 'Smartphone', 2, 730.00, '2024-04-02 12:50:00'),
+    (133, 'Tablet', 3, 470.00, '2024-04-02 14:25:00'),
+    (134, 'Monitor', 2, 310.00, '2024-04-03 09:40:00'),
+    (135, 'Wireless Mouse', 4, 35.00, '2024-04-03 12:15:00'),
+    (136, 'Keyboard', 2, 65.00, '2024-04-03 15:05:00'),
+    (137, 'Headphones', 3, 125.00, '2024-04-04 10:30:00'),
+    (138, 'External Hard Drive', 1, 230.00, '2024-04-04 16:40:00'),
+    (139, 'Smartwatch', 2, 180.00, '2024-04-05 08:45:00'),
+    (140, 'Bluetooth Speaker', 3, 95.00, '2024-04-05 13:30:00'),
+    (141, 'Laptop', 2, 890.00, '2024-04-06 09:35:00'),
+    (142, 'Smartphone', 1, 740.00, '2024-04-06 11:20:00'),
+    (143, 'Tablet', 3, 480.00, '2024-04-06 14:55:00'),
+    (144, 'Monitor', 1, 280.00, '2024-04-07 09:05:00'),
+    (145, 'Wireless Mouse', 5, 40.00, '2024-04-07 12:25:00'),
+    (146, 'Keyboard', 3, 70.00, '2024-04-07 15:20:00'),
+    (147, 'Headphones', 2, 140.00, '2024-04-08 10:10:00'),
+    (148, 'External Hard Drive', 1, 240.00, '2024-04-08 17:00:00'),
+    (149, 'Smartwatch', 2, 190.00, '2024-04-09 08:55:00'),
+    (150, 'Bluetooth Speaker', 3, 100.00, '2024-04-09 13:55:00');
+
+
+CREATE TABLE ControlTable (
+    TableName NVARCHAR(50),
+    LastProcessedTimestamp DATETIME
+);
+INSERT INTO ControlTable (TableName, LastProcessedTimestamp)
+VALUES ('SalesData', '2024-03-01 00:00:00');
+
+
+CREATE TABLE AnalyticsSalesData (
+    SalesID INT IDENTITY(1,1) PRIMARY KEY,
+    CustomerID INT,
+    ProductName NVARCHAR(100),
+    Quantity INT,
+    UnitPrice DECIMAL(10,2),
+    TotalAmount AS (Quantity * UnitPrice) PERSISTED,
+    SaleDate DATETIME DEFAULT GETDATE(),
+    ModifiedDate DATETIME DEFAULT GETDATE()
+);
+
+
+CREATE PROCEDURE UpdateLastProcessedTimestamp
+AS
+BEGIN
+    UPDATE ControlTable
+    SET LastProcessedTimestamp = FORMAT(GETDATE(), 'yyyy-MM-dd HH:mm:ss')
+    WHERE TableName = 'SalesData';
+END
